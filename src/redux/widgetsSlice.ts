@@ -9,69 +9,44 @@ export interface Widget {
 export interface WidgetsState {
   max_id: number;
   locked: boolean;
+  n_rows: number;
+  n_cols: number;
 
-  compaction?: "horizontal" | "vertical" | null;
+  compaction: "horizontal" | "vertical" | null;
   //
   widgets: Widget[];
 }
 
 const initialState: WidgetsState = {
   max_id: 9,
+  n_rows: 6,
+  n_cols: 10,
   locked: true,
+  compaction: "vertical",
   widgets: [
     {
       gridProps: {
         x: 0,
         y: 0,
-        w: 1,
-        h: 1,
+        w: 4,
+        h: 2,
         i: "0",
       },
-      url: "https://reactjs.org/",
+      url: "https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&light=0&autoplay=1&feed=%2FRojEiO%2Feminem-kamikaze-exclusive-fire-new%2F",
     },
     {
       gridProps: {
         isResizable: true,
         x: 5,
         y: 5,
-        w: 1,
-        h: 1,
+        w: 3,
+        h: 3,
         i: "1",
       },
-      url: "https://redux.js.org/",
+      url: "https://getkairo.com/embed-local?id=e1e6447e-2407-418d-8c81-a828f0f865bc&local=true&title=Focus&type=Block&color=green&size=2&faceType=default",
     },
   ],
 };
-
-export function findNextAvailablePosition(
-  widgets: Widget[],
-  maxCols: number = 12,
-  maxRows: number = 6
-) {
-  const positions = Array.from({ length: maxRows }, () =>
-    Array(maxCols).fill(false)
-  );
-  widgets.forEach((widget) => {
-    const { x, y, w, h } = widget.gridProps;
-    for (let i = 0; i < h; i++) {
-      for (let j = 0; j < w; j++) {
-        if (y + i < maxRows && x + j < maxCols) {
-          positions[y + i][x + j] = true;
-        }
-      }
-    }
-  });
-
-  for (let row = 0; row < maxRows; row++) {
-    for (let col = 0; col < maxCols; col++) {
-      if (!positions[row][col]) {
-        return { x: col, y: row, w: 1, h: 1, i: "" };
-      }
-    }
-
-    return null;
-  }
-}
 
 export const widgetsSlice = createSlice({
   name: "widgets",
@@ -103,9 +78,20 @@ export const widgetsSlice = createSlice({
     toggleLocked: (state) => {
       state.locked = !state.locked;
     },
+    changeCompaction: (
+      state,
+      action: PayloadAction<"horizontal" | "vertical" | null>
+    ) => {
+      state.compaction = action.payload;
+    },
   },
 });
 
-export const { addWidget, deleteWidget, setWidgets, toggleLocked } =
-  widgetsSlice.actions;
+export const {
+  addWidget,
+  deleteWidget,
+  setWidgets,
+  toggleLocked,
+  changeCompaction,
+} = widgetsSlice.actions;
 export default widgetsSlice.reducer;

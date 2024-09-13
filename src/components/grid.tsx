@@ -5,7 +5,7 @@ import { RootState } from "../redux/store";
 import { setWidgets } from "../redux/widgetsSlice";
 
 function Grid({ height }: { height: number }) {
-  const { widgets, locked, compaction } = useSelector(
+  const { widgets, locked, compaction, n_rows, n_cols } = useSelector(
     (state: RootState) => state.widgets
   );
   const dispatch = useDispatch();
@@ -15,7 +15,6 @@ function Grid({ height }: { height: number }) {
   };
 
   const layout = widgets.map((w) => w.gridProps);
-  const n_rows = 6;
   const gap = 10;
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -50,7 +49,7 @@ function Grid({ height }: { height: number }) {
       <GridLayout
         layout={layout}
         className={`size-full ${locked ? "hide-resize" : ""}`}
-        cols={10}
+        cols={n_cols}
         rowHeight={rowHeight}
         width={containerWidth}
         margin={[gap, gap]}
@@ -61,14 +60,24 @@ function Grid({ height }: { height: number }) {
         isDraggable={!locked}
         isDroppable={!locked}
         preventCollision
+        draggableHandle=".drag-handle"
         resizeHandles={["n", "e", "w", "s"]}>
         {widgets.map((item) => (
           <div
-            className=" bg-green-400 rounded-md"
+            className={` rounded-md flex items-center justify-center flex-col ${
+              locked ? "bg-inherit" : "p-2 pt-0 bg-red-500 bg-opacity-10"
+            }`}
             key={item.gridProps.i}
             //
           >
-            {/* {item.url} */}
+            {!locked && (
+              <div className="drag-handle w-full h-8 py-1 flex flex-col gap-1 cursor-grab focus:cursor-grabbing">
+                {Array.from({ length: 3 }).map((_, i) => (
+                  <div className="rounded-full bg-white bg-opacity-50 h-1 w-full"></div>
+                ))}
+              </div>
+            )}
+            <iframe src={item.url} className="size-full"></iframe>
           </div>
         ))}
       </GridLayout>

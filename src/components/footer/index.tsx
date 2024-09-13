@@ -2,7 +2,7 @@ import { IconContext } from "react-icons";
 import Settings from "./settings";
 import { useContext } from "react";
 import { ThemeContext, ThemeType } from "grommet";
-import AddWidget from "./add-widget";
+import ButtonAddWidget from "./add-widget";
 import Lock from "./lock";
 
 function Footer({ height }: { height: number }) {
@@ -23,7 +23,7 @@ function Footer({ height }: { height: number }) {
       <IconContext.Provider value={{ size: "26px" }}>
         <div className="flex items-center flex-start gap-3">
           <Settings />
-          <AddWidget />
+          <ButtonAddWidget />
         </div>
         <div className="flex justify-end items-center gap-2">
           <Lock />

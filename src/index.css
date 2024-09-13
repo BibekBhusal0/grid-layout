@@ -20,32 +20,32 @@
   bottom: 0;
   right: 0;
   cursor: se-resize;
-  border-right: 3px solid #ddd;
-  border-bottom: 3px solid #ddd;
+  border-right: 4px solid #ddd;
+  border-bottom: 4px solid #ddd;
 }
 
 .react-resizable-handle-sw {
   bottom: 0;
   left: 0;
   cursor: sw-resize;
-  border-left: 3px solid #ddd;
-  border-bottom: 3px solid #ddd;
+  border-left: 4px solid #ddd;
+  border-bottom: 4px solid #ddd;
 }
 
 .react-resizable-handle-ne {
   top: 0;
   right: 0;
   cursor: ne-resize;
-  border-right: 3px solid #ddd;
-  border-top: 3px solid #ddd;
+  border-right: 4px solid #ddd;
+  border-top: 4px solid #ddd;
 }
 
 .react-resizable-handle-nw {
   top: 0;
   left: 0;
   cursor: nw-resize;
-  border-left: 3px solid #ddd;
-  border-top: 3px solid #ddd;
+  border-left: 4px solid #ddd;
+  border-top: 4px solid #ddd;
 }
 
 .react-resizable-handle-n {
@@ -53,7 +53,7 @@
   left: 50%;
   transform: translateX(-50%);
   cursor: n-resize;
-  border-top: 3px solid #ddd;
+  border-top: 4px solid #ddd;
 }
 
 .react-resizable-handle-s {
@@ -61,7 +61,7 @@
   left: 50%;
   transform: translateX(-50%);
   cursor: s-resize;
-  border-bottom: 3px solid #ddd;
+  border-bottom: 4px solid #ddd;
 }
 
 .react-resizable-handle-e {
@@ -69,7 +69,7 @@
   top: 50%;
   transform: translateY(-50%);
   cursor: e-resize;
-  border-right: 3px solid #ddd;
+  border-right: 4px solid #ddd;
 }
 
 .react-resizable-handle-w {
@@ -77,5 +77,10 @@
   top: 50%;
   transform: translateY(-50%);
   cursor: w-resize;
-  border-left: 3px solid #ddd;
+  border-left: 4px solid #ddd;
+}
+
+.capitalize .bscUMM {
+  padding: 0;
+  text-transform: capitalize;
 }

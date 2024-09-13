@@ -5,9 +5,7 @@ import { Button } from "grommet";
 import { toggleLocked } from "../../redux/widgetsSlice";
 
 function Lock() {
-  const {
-    widgets: { locked },
-  } = useSelector((state: RootState): RootState => state);
+  const { locked } = useSelector((state: RootState) => state.widgets);
   const dispatch = useDispatch();
   return (
     <Button
