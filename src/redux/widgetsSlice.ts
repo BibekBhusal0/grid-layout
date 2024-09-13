@@ -8,17 +8,22 @@ export interface Widget {
 }
 export interface WidgetsState {
   max_id: number;
+  locked: boolean;
+
+  compaction?: "horizontal" | "vertical" | null;
+  //
   widgets: Widget[];
 }
 
 const initialState: WidgetsState = {
   max_id: 9,
+  locked: true,
   widgets: [
     {
       gridProps: {
         x: 0,
         y: 0,
-        w: 3,
+        w: 1,
         h: 1,
         i: "0",
       },
@@ -26,9 +31,10 @@ const initialState: WidgetsState = {
     },
     {
       gridProps: {
+        isResizable: true,
         x: 5,
         y: 5,
-        w: 3,
+        w: 1,
         h: 1,
         i: "1",
       },
@@ -36,6 +42,36 @@ const initialState: WidgetsState = {
     },
   ],
 };
+
+export function findNextAvailablePosition(
+  widgets: Widget[],
+  maxCols: number = 12,
+  maxRows: number = 6
+) {
+  const positions = Array.from({ length: maxRows }, () =>
+    Array(maxCols).fill(false)
+  );
+  widgets.forEach((widget) => {
+    const { x, y, w, h } = widget.gridProps;
+    for (let i = 0; i < h; i++) {
+      for (let j = 0; j < w; j++) {
+        if (y + i < maxRows && x + j < maxCols) {
+          positions[y + i][x + j] = true;
+        }
+      }
+    }
+  });
+
+  for (let row = 0; row < maxRows; row++) {
+    for (let col = 0; col < maxCols; col++) {
+      if (!positions[row][col]) {
+        return { x: col, y: row, w: 1, h: 1, i: "" };
+      }
+    }
+
+    return null;
+  }
+}
 
 export const widgetsSlice = createSlice({
   name: "widgets",
@@ -64,8 +100,12 @@ export const widgetsSlice = createSlice({
         };
       });
     },
+    toggleLocked: (state) => {
+      state.locked = !state.locked;
+    },
   },
 });
 
-export const { addWidget, deleteWidget, setWidgets } = widgetsSlice.actions;
+export const { addWidget, deleteWidget, setWidgets, toggleLocked } =
+  widgetsSlice.actions;
 export default widgetsSlice.reducer;

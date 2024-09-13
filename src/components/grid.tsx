@@ -1,21 +1,34 @@
 import { useEffect, useState, useRef } from "react";
-import GridLayout from "react-grid-layout";
-import { useSelector } from "react-redux";
+import GridLayout, { Layout } from "react-grid-layout";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
+import { setWidgets } from "../redux/widgetsSlice";
 
 function Grid({ height }: { height: number }) {
-  const widgets = useSelector((state: RootState) => state.widgets.widgets);
+  const { widgets, locked, compaction } = useSelector(
+    (state: RootState) => state.widgets
+  );
+  const dispatch = useDispatch();
+
+  const handleChange = (layout: Layout[]) => {
+    dispatch(setWidgets(layout));
+  };
+
   const layout = widgets.map((w) => w.gridProps);
   const n_rows = 6;
+  const gap = 10;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const [containerWidth, setContainerWidth] = useState(1500);
-  const [rowHeight, setRowHeight] = useState(100);
+  const [rowHeight, setRowHeight] = useState(10);
+
   useEffect(() => {
     const handleResize = () => {
       if (containerRef.current) {
         setContainerWidth(containerRef.current.offsetWidth);
-        setRowHeight(containerRef.current.offsetHeight / n_rows);
+        setRowHeight(
+          (containerRef.current.offsetHeight - gap * n_rows) / n_rows
+        );
       }
     };
 
@@ -25,24 +38,37 @@ function Grid({ height }: { height: number }) {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [widgets.length]);
+  }, []);
 
   return (
     <div
       ref={containerRef}
       style={{ height: `${height}%` }}
-      className="relative w-full">
+      className="relative w-full overflow-hidden"
+      //
+    >
       <GridLayout
         layout={layout}
-        className="size-full"
+        className={`size-full ${locked ? "hide-resize" : ""}`}
         cols={10}
         rowHeight={rowHeight}
-        width={containerWidth}>
+        width={containerWidth}
+        margin={[gap, gap]}
+        onLayoutChange={handleChange}
+        maxRows={n_rows}
+        compactType={compaction}
+        isResizable={!locked}
+        isDraggable={!locked}
+        isDroppable={!locked}
+        preventCollision
+        resizeHandles={["n", "e", "w", "s"]}>
         {widgets.map((item) => (
           <div
-            className="text-xl bg-green-400 rounded-md p-4 overflow-auto"
-            key={item.gridProps.i}>
-            {item.url}
+            className=" bg-green-400 rounded-md"
+            key={item.gridProps.i}
+            //
+          >
+            {/* {item.url} */}
           </div>
         ))}
       </GridLayout>

@@ -1,3 +1,81 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.react-resizable-handle {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  cursor: pointer;
+}
+
+.hide-resize .react-resizable-handle {
+  display: none;
+}
+.react-grid-placeholder .react-resizable-handle {
+  display: none;
+}
+
+.react-resizable-handle-se {
+  bottom: 0;
+  right: 0;
+  cursor: se-resize;
+  border-right: 3px solid #ddd;
+  border-bottom: 3px solid #ddd;
+}
+
+.react-resizable-handle-sw {
+  bottom: 0;
+  left: 0;
+  cursor: sw-resize;
+  border-left: 3px solid #ddd;
+  border-bottom: 3px solid #ddd;
+}
+
+.react-resizable-handle-ne {
+  top: 0;
+  right: 0;
+  cursor: ne-resize;
+  border-right: 3px solid #ddd;
+  border-top: 3px solid #ddd;
+}
+
+.react-resizable-handle-nw {
+  top: 0;
+  left: 0;
+  cursor: nw-resize;
+  border-left: 3px solid #ddd;
+  border-top: 3px solid #ddd;
+}
+
+.react-resizable-handle-n {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: n-resize;
+  border-top: 3px solid #ddd;
+}
+
+.react-resizable-handle-s {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: s-resize;
+  border-bottom: 3px solid #ddd;
+}
+
+.react-resizable-handle-e {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: e-resize;
+  border-right: 3px solid #ddd;
+}
+
+.react-resizable-handle-w {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: w-resize;
+  border-left: 3px solid #ddd;
+}
