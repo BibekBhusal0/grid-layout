@@ -13,37 +13,66 @@ export interface WidgetsState {
   n_cols: number;
 
   compaction: "horizontal" | "vertical" | null;
-  //
   widgets: Widget[];
 }
 
 const initialState: WidgetsState = {
-  max_id: 9,
-  n_rows: 6,
-  n_cols: 10,
+  max_id: 3,
+  n_rows: 8,
+  n_cols: 12,
   locked: true,
-  compaction: "vertical",
+  compaction: null,
   widgets: [
     {
       gridProps: {
-        x: 0,
-        y: 0,
+        x: 8,
+        y: 6,
         w: 4,
         h: 2,
         i: "0",
       },
-      url: "https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&light=0&autoplay=1&feed=%2FRojEiO%2Feminem-kamikaze-exclusive-fire-new%2F",
+      url: "https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=%2Fpueblovista%2Fmorning-coffee-mixtape-chillhop-lofi-hip-hop%2F",
     },
     {
       gridProps: {
         isResizable: true,
-        x: 5,
-        y: 5,
-        w: 3,
-        h: 3,
+        x: 0,
+        y: 0,
+        w: 2,
+        h: 4,
         i: "1",
       },
-      url: "https://getkairo.com/embed-local?id=e1e6447e-2407-418d-8c81-a828f0f865bc&local=true&title=Focus&type=Block&color=green&size=2&faceType=default",
+      url: "https://indify.co/widgets/live/weather/6IrFOuag2Pz5NlkM9qFw",
+    },
+    {
+      url: "https://flipclock.app/",
+      gridProps: {
+        x: 4,
+        y: 0,
+        w: 4,
+        h: 3,
+        i: "2",
+      },
+    },
+    {
+      url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?si=75D2gP3Jcu8MWNqa"',
+      gridProps: {
+        x: 0,
+        y: 5,
+        w: 4,
+        h: 3,
+        i: "3",
+      },
+    },
+    {
+      url: "https://getkairo.com/embed-local?id=07770ed8-bc63-47d5-9075-2b783d0209a7&local=true&title=Focus&type=Block&color=amber&size=3&faceType=default",
+      gridProps: {
+        x: 9,
+        y: 1,
+        w: 3,
+        h: 5,
+        i: "4",
+      },
     },
   ],
 };
@@ -58,6 +87,7 @@ export const widgetsSlice = createSlice({
         url: action.payload.url,
         gridProps: { ...action.payload.gridProps, i: state.max_id.toString() },
       });
+      console.log(state.widgets);
     },
     deleteWidget: (state, action: PayloadAction<string>) => {
       state.widgets = state.widgets.filter(

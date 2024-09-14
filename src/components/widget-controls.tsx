@@ -17,18 +17,12 @@ function WidgetControls({
   handleDelete,
 }: widgetControlsProps) {
   return (
-    <div className="flex gap-3 group items-center justify-between px-3 w-full h-9">
-      <div className="drag-handle flex flex-col gap-1 cursor-grab ">
-        <RxDragHandleDots1 className="rotate-90 text-4xl" />
-      </div>
-      <div className="flex gap-3">
-        <Button
-          icon={<AiFillDelete className="text-xl" />}
-          plain
-          onClick={handleDelete}
-        />
+    <div className="flex gap-3 group items-center justify-between w-full h-6">
+      <RxDragHandleDots1 className="drag-handle cursor-grab focus:cursor-grabbing rotate-90 text-2xl shrink-0" />
+      <div className="flex gap-1">
+        <Button icon={<AiFillDelete />} plain onClick={handleDelete} />
         <DropButton
-          icon={<FaEdit className="text-xl" />}
+          icon={<FaEdit />}
           dropProps={{ align: { top: "bottom", left: "left" } }}
           dropContent={<DropItem crrUrl={crrUrl} changeURL={changeURL} />}
         />

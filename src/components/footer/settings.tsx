@@ -34,12 +34,12 @@ export function Settings() {
 }
 
 function DropContent() {
-  const { locked, compaction } = useSelector(
+  const { locked, compaction, widgets } = useSelector(
     (state: RootState) => state.widgets
   );
+  console.log(widgets);
   const dispatch = useDispatch();
   const handleSelectionChange = (e: any) => {
-    console.log(e);
     var val = e.option;
     val = val === "none" ? null : val;
     dispatch(changeCompaction(val));

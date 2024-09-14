@@ -65,8 +65,8 @@ function Grid({ height }: { height: number }) {
         resizeHandles={["n", "e", "w", "s"]}>
         {widgets.map((item) => (
           <div
-            className={` rounded-md flex items-center justify-center flex-col ${
-              locked ? "bg-inherit" : "p-2 pt-0 bg-red-500 bg-opacity-10"
+            className={`rounded-md flex flex-col ${
+              locked ? "" : "p-2 pt-0 bg-red-500 bg-opacity-10"
             }`}
             key={item.gridProps.i}
             //
