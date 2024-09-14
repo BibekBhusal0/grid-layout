@@ -64,6 +64,17 @@ export const widgetsSlice = createSlice({
         (widget) => widget.gridProps.i !== action.payload
       );
     },
+    setWidgetURL: (
+      state,
+      action: PayloadAction<{ id: string; url: string }>
+    ) => {
+      const widget = state.widgets.find(
+        (w) => w.gridProps.i === action.payload.id
+      );
+      if (widget) {
+        widget.url = action.payload.url;
+      }
+    },
     setWidgets: (state, action: PayloadAction<Layout[]>) => {
       state.widgets = state.widgets.map((widget) => {
         const newWidget = action.payload.find(
@@ -93,5 +104,6 @@ export const {
   setWidgets,
   toggleLocked,
   changeCompaction,
+  setWidgetURL,
 } = widgetsSlice.actions;
 export default widgetsSlice.reducer;

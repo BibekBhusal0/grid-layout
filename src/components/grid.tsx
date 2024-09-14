@@ -2,7 +2,8 @@ import { useEffect, useState, useRef } from "react";
 import GridLayout, { Layout } from "react-grid-layout";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { setWidgets } from "../redux/widgetsSlice";
+import { deleteWidget, setWidgets, setWidgetURL } from "../redux/widgetsSlice";
+import WidgetControls from "./widget-controls";
 
 function Grid({ height }: { height: number }) {
   const { widgets, locked, compaction, n_rows, n_cols } = useSelector(
@@ -71,11 +72,13 @@ function Grid({ height }: { height: number }) {
             //
           >
             {!locked && (
-              <div className="drag-handle w-full h-8 py-1 flex flex-col gap-1 cursor-grab focus:cursor-grabbing">
-                {Array.from({ length: 3 }).map((_, i) => (
-                  <div className="rounded-full bg-white bg-opacity-50 h-1 w-full"></div>
-                ))}
-              </div>
+              <WidgetControls
+                crrUrl={item.url}
+                changeURL={(url) =>
+                  dispatch(setWidgetURL({ id: item.gridProps.i, url }))
+                }
+                handleDelete={() => dispatch(deleteWidget(item.gridProps.i))}
+              />
             )}
             <iframe src={item.url} className="size-full"></iframe>
           </div>
