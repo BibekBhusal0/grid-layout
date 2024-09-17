@@ -1,14 +1,12 @@
 import { useEffect, useState, useRef } from "react";
 import GridLayout, { Layout } from "react-grid-layout";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../redux/store";
+import { useDispatch } from "react-redux";
 import { deleteWidget, setWidgets, setWidgetURL } from "../redux/widgetsSlice";
 import WidgetControls from "./widget-controls";
+import useCurrentMode from "../redux/useCurrentMode";
 
 function Grid({ height }: { height: number }) {
-  const { widgets, locked, compaction, n_rows, n_cols } = useSelector(
-    (state: RootState) => state.widgets
-  );
+  const { widgets, locked, compaction, n_rows, n_cols } = useCurrentMode();
   const dispatch = useDispatch();
 
   const handleChange = (layout: Layout[]) => {

@@ -1,9 +1,9 @@
 import { DropButton, CheckBox, Select } from "grommet";
 import { useState } from "react";
 import { RiSettings5Fill } from "react-icons/ri";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { useDispatch } from "react-redux";
 import { changeCompaction, toggleLocked } from "../../redux/widgetsSlice";
+import useCurrentMode from "../../redux/useCurrentMode";
 
 export function Settings() {
   const [open, setOpen] = useState(false);
@@ -34,9 +34,7 @@ export function Settings() {
 }
 
 function DropContent() {
-  const { locked, compaction, widgets } = useSelector(
-    (state: RootState) => state.widgets
-  );
+  const { locked, compaction, widgets } = useCurrentMode();
   console.log(widgets);
   const dispatch = useDispatch();
   const handleSelectionChange = (e: any) => {
@@ -47,22 +45,28 @@ function DropContent() {
 
   return (
     <div className="flex flex-col gap-6 justify-center">
-      <div className="flex justify-between">
+      <div className="flex items-center justify-between">
         <div className="text-xl">Locked</div>
         <CheckBox
+          className="text-4xl"
           toggle
-          name="locked"
           checked={locked}
           reverse
           onChange={() => dispatch(toggleLocked())}></CheckBox>
       </div>
-      <Select
-        onChange={handleSelectionChange}
-        className="capitalize"
-        dropProps={{ className: "capitalize" }}
-        value={compaction ?? "none"}
-        options={["none", "horizontal", "vertical"]}
-      />
+      <div className="flex-center gap-5">
+        <div className="text-xl">Compaction</div>
+        <Select
+          name="compaction"
+          width={"120px"}
+          aria-label="compaction"
+          onChange={handleSelectionChange}
+          className="capitalize"
+          dropProps={{ className: "capitalize" }}
+          value={compaction ?? "none"}
+          options={["none", "horizontal", "vertical"]}
+        />
+      </div>
     </div>
   );
 }

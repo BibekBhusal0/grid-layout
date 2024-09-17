@@ -1,11 +1,11 @@
 import { IoMdUnlock, IoMdLock } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { useDispatch } from "react-redux";
 import { Button } from "grommet";
 import { toggleLocked } from "../../redux/widgetsSlice";
+import useCurrentMode from "../../redux/useCurrentMode";
 
 function Lock() {
-  const { locked } = useSelector((state: RootState) => state.widgets);
+  const { locked } = useCurrentMode();
   const dispatch = useDispatch();
   return (
     <Button

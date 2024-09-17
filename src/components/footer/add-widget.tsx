@@ -1,9 +1,10 @@
 import { Button, DropButton, TextInput, Text, RangeInput } from "grommet";
 import { HiViewGridAdd } from "react-icons/hi";
-import { addWidget, Widget } from "../../redux/widgetsSlice";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../redux/store";
+import { addWidget } from "../../redux/widgetsSlice";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
+import useCurrentMode from "../../redux/useCurrentMode";
+import { Widget } from "../../redux/widgets";
 
 export const urlPattern = /(https?:\/\/[^\s]+|www\.[^\s]+)/;
 
@@ -60,9 +61,7 @@ function findNextAvailablePosition(
 }
 
 function ButtonAddWidget() {
-  const { n_cols, n_rows, widgets } = useSelector(
-    (state: RootState) => state.widgets
-  );
+  const { n_cols, n_rows, widgets } = useCurrentMode();
   const available_widgets = findNextAvailablePosition(widgets, n_cols, n_rows);
   return (
     <DropButton
@@ -78,9 +77,7 @@ function ButtonAddWidget() {
 }
 
 function DropContent() {
-  const { n_cols, n_rows, widgets } = useSelector(
-    (state: RootState) => state.widgets
-  );
+  const { n_cols, n_rows, widgets } = useCurrentMode();
   const dispatch = useDispatch();
   const [text, setText] = useState("");
   const [extractedUrl, setExtractedUrl] = useState("");
