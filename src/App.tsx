@@ -1,5 +1,7 @@
 import "./App.css";
 import Footer from "./components/footer";
+import { css } from "styled-components";
+
 import Grid from "./components/grid";
 import { Grommet, ThemeType } from "grommet";
 
@@ -39,6 +41,28 @@ const theme: ThemeType = {
       selected: "#A8D292",
       "selected-background": "#2C4F1D",
       "selected-text": "#E1E4DA",
+    },
+  },
+  tab: {
+    active: {
+      background: "#1E432E",
+    },
+
+    border: undefined,
+    pad: "small",
+    extend: () => css`
+      border-radius: 6px;
+    `,
+    hover: {
+      background: "#446351",
+    },
+  },
+  tabs: {
+    panel: {
+      extend: () => css`
+        width: 100%;
+        height: 100%;
+      `,
     },
   },
 };

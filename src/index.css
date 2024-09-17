@@ -74,7 +74,7 @@
   cursor: w-resize;
 }
 
-.capitalize .bscUMM {
+.capitalize [role="option"] {
   text-transform: capitalize;
 }
 
@@ -86,4 +86,14 @@
 }
 .drag-handle:focus {
   cursor: grabbing;
+}
+
+.vertical-tabs [role="tablist"] > div {
+  flex-direction: column;
+}
+
+.vertical-tabs [role="tablist"] {
+  padding-top: 1.2rem;
+  height: 100%;
+  border-right: 2px solid;
 }

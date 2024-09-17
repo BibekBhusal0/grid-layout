@@ -19,6 +19,18 @@ export interface SingleMode {
   widgets: Widget[];
 }
 
+export const emptyMode: SingleMode = {
+  id: 10,
+  name: "empty",
+  max_id: 1,
+  n_rows: 8,
+  n_cols: 12,
+  locked: true,
+  delete_able: true,
+  compaction: null,
+  widgets: [],
+};
+
 export interface ModesState {
   max_id: number;
   current_id: number;
@@ -33,6 +45,7 @@ export const defaultMode: SingleMode = {
   n_cols: 12,
   locked: true,
   compaction: null,
+  delete_able: false,
   widgets: [
     {
       gridProps: {
@@ -82,5 +95,5 @@ export const defaultMode: SingleMode = {
 export const initialState: ModesState = {
   max_id: 3,
   current_id: 0,
-  modes: [defaultMode],
+  modes: [defaultMode, { ...emptyMode, id: 1 }, { ...emptyMode, id: 2 }],
 };

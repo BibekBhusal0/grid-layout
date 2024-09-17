@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { Layout } from "react-grid-layout";
-import { initialState, Widget } from "./widgets";
+import { emptyMode, initialState, Widget } from "./widgets";
 
 export const widgetsSlice = createSlice({
   name: "widgets",
@@ -62,6 +62,31 @@ export const widgetsSlice = createSlice({
       if (!crrMode) return;
       crrMode.compaction = action.payload;
     },
+    //
+    addMode: (state, action: PayloadAction<string>) => {
+      state.max_id++;
+      state.modes.push({
+        ...emptyMode,
+        id: state.max_id,
+        name: action.payload,
+      });
+    },
+    changeMode: (state, action: PayloadAction<number>) => {
+      const newMode = state.modes.find((mode) => mode.id === action.payload);
+      if (newMode) state.current_id = newMode.id;
+    },
+    deleteMode: (state, action: PayloadAction<number>) => {
+      const modeToDelete = state.modes.find(
+        (mode) => mode.id === action.payload
+      );
+      if (modeToDelete) {
+        if (modeToDelete.delete_able) {
+          state.modes = state.modes.filter(
+            (mode) => mode.id !== action.payload
+          );
+        }
+      }
+    },
   },
 });
 
@@ -72,5 +97,8 @@ export const {
   toggleLocked,
   changeCompaction,
   setWidgetURL,
+  addMode,
+  changeMode,
+  deleteMode,
 } = widgetsSlice.actions;
 export default widgetsSlice.reducer;
