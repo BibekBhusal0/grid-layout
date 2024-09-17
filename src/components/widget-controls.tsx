@@ -2,7 +2,6 @@ import { Button, DropButton, Text, TextInput } from "grommet";
 import { useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
 import { FaEdit } from "react-icons/fa";
-import { RxDragHandleDots1 } from "react-icons/rx";
 import { urlPattern } from "./footer/add-widget";
 
 interface widgetControlsProps {
@@ -17,16 +16,19 @@ function WidgetControls({
   handleDelete,
 }: widgetControlsProps) {
   return (
-    <div className="flex gap-3 group items-center justify-between w-full h-6">
-      <RxDragHandleDots1 className="drag-handle cursor-grab focus:cursor-grabbing rotate-90 text-2xl shrink-0" />
-      <div className="flex gap-1">
-        <Button icon={<AiFillDelete />} plain onClick={handleDelete} />
-        <DropButton
-          icon={<FaEdit />}
-          dropProps={{ align: { top: "bottom", left: "left" } }}
-          dropContent={<DropItem crrUrl={crrUrl} changeURL={changeURL} />}
-        />
-      </div>
+    <div className="flex gap-1">
+      <Button
+        icon={<AiFillDelete className="text-2xl" />}
+        size="large"
+        plain
+        onClick={handleDelete}
+      />
+      <DropButton
+        size="large"
+        icon={<FaEdit className="text-xl" />}
+        dropProps={{ align: { top: "bottom", left: "left" } }}
+        dropContent={<DropItem crrUrl={crrUrl} changeURL={changeURL} />}
+      />
     </div>
   );
 }

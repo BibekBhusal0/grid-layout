@@ -54,16 +54,7 @@ const initialState: WidgetsState = {
         i: "2",
       },
     },
-    {
-      url: 'https://www.youtube.com/embed/dQw4w9WgXcQ?si=75D2gP3Jcu8MWNqa"',
-      gridProps: {
-        x: 0,
-        y: 5,
-        w: 4,
-        h: 3,
-        i: "3",
-      },
-    },
+
     {
       url: "https://getkairo.com/embed-local?id=07770ed8-bc63-47d5-9075-2b783d0209a7&local=true&title=Focus&type=Block&color=amber&size=3&faceType=default",
       gridProps: {
@@ -71,7 +62,7 @@ const initialState: WidgetsState = {
         y: 1,
         w: 3,
         h: 5,
-        i: "4",
+        i: "3",
       },
     },
   ],

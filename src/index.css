@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+}
+
 .react-resizable-handle {
-  width: 20px;
-  height: 20px;
+  width: 4px;
+  height: 4px;
   position: absolute;
   cursor: pointer;
 }
@@ -20,67 +26,64 @@
   bottom: 0;
   right: 0;
   cursor: se-resize;
-  border-right: 4px solid #ddd;
-  border-bottom: 4px solid #ddd;
 }
 
 .react-resizable-handle-sw {
   bottom: 0;
   left: 0;
   cursor: sw-resize;
-  border-left: 4px solid #ddd;
-  border-bottom: 4px solid #ddd;
 }
 
 .react-resizable-handle-ne {
   top: 0;
   right: 0;
   cursor: ne-resize;
-  border-right: 4px solid #ddd;
-  border-top: 4px solid #ddd;
 }
 
 .react-resizable-handle-nw {
   top: 0;
   left: 0;
   cursor: nw-resize;
-  border-left: 4px solid #ddd;
-  border-top: 4px solid #ddd;
 }
 
 .react-resizable-handle-n {
   top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 100%;
+  left: 0;
   cursor: n-resize;
-  border-top: 4px solid #ddd;
 }
 
 .react-resizable-handle-s {
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 100%;
+  left: 0;
   cursor: s-resize;
-  border-bottom: 4px solid #ddd;
 }
 
 .react-resizable-handle-e {
   right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
+  height: 100%;
   cursor: e-resize;
-  border-right: 4px solid #ddd;
 }
 
 .react-resizable-handle-w {
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 0;
+  height: 100%;
   cursor: w-resize;
-  border-left: 4px solid #ddd;
 }
 
 .capitalize .bscUMM {
-  padding: 0;
   text-transform: capitalize;
+}
+
+.drag-handle {
+  cursor: grab;
+}
+.drag-handle:active {
+  cursor: grabbing;
+}
+.drag-handle:focus {
+  cursor: grabbing;
 }

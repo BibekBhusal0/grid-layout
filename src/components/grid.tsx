@@ -62,16 +62,19 @@ function Grid({ height }: { height: number }) {
         isDroppable={!locked}
         preventCollision
         draggableHandle=".drag-handle"
-        resizeHandles={["n", "e", "w", "s"]}>
+        resizeHandles={["n", "e", "w", "s", "se"]}>
         {widgets.map((item) => (
           <div
-            className={`rounded-md flex flex-col ${
-              locked ? "" : "p-2 pt-0 bg-red-500 bg-opacity-10"
+            className={`rounded-md flex flex-col group ${
+              locked ? "" : " bg-red-500 bg-opacity-10"
             }`}
             key={item.gridProps.i}
             //
           >
             {!locked && (
+              <div className="w-full bg-green-500 opacity-15 drag-handle h-5 absolute top-0 left-0"></div>
+            )}
+            <div className="absolute pl-2 top-0 right-0 bg-gray-800 group-hover:block hidden">
               <WidgetControls
                 crrUrl={item.url}
                 changeURL={(url) =>
@@ -79,7 +82,7 @@ function Grid({ height }: { height: number }) {
                 }
                 handleDelete={() => dispatch(deleteWidget(item.gridProps.i))}
               />
-            )}
+            </div>
             <iframe src={item.url} className="size-full"></iframe>
           </div>
         ))}
